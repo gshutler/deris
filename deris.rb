@@ -10,7 +10,7 @@ module Deris
     if template.is_a? Symbol
       template = template.to_s
     else
-      template = read_file(template)
+      template = File[template]
     end
     haml_engine = Haml::Engine.new(template)
     haml_engine.render(self)
