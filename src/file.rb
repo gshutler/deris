@@ -31,7 +31,7 @@ module Deris
     
     def partial(template)
       if template.is_a? Symbol
-        template = @partials[template]
+        template = @partials[template] || ''
       end
       render(template)
     end
