@@ -7,15 +7,12 @@ require 'rdiscount'
 
 class Deris
 
-  def self.generate_site(directory)
-    defaults = {}
-    source_directory = File.join(directory, '_source')
-    
+  def self.generate_site(src, output)
+    source_directory = File.join(src, '_source')
     defaults = partials_from source_directory
     
-    File.open(File.join(directory, 'index.html'), 'w+') do |file|
-      file.write Deris.new(defaults).render
-    end
+    output_path = File.join(output, 'index.html')
+    Deris.new(defaults).write output_path
     
     source_directory_mask = File.join(source_directory, '*')
     source_directories = Dir[source_directory_mask].find_all do |dir|
@@ -26,9 +23,8 @@ class Deris
       partials = partials_from dir
       partials = defaults.merge(partials)
       
-      File.open(File.join(directory, "#{File.basename(dir)}.html"), 'w+') do |file|
-        file.write Deris.new(partials).render
-      end 
+      output_path = File.join(output, "#{File.basename(dir)}.html")
+      Deris.new(partials).write output_path
     end
   end
   
@@ -41,6 +37,12 @@ class Deris
       template = @partials[template]
     end
     render(template)
+  end
+
+  def write(path)
+    File.open(path, 'w+') do |file|
+      file.write render
+    end
   end
   
   def render(template = nil)
@@ -71,12 +73,12 @@ class Deris
     
     partials
   end
-
+  
 end
 
 if __FILE__ == $0
   if File.directory? ARGV[0]
-    Deris::generate_site(ARGV[0]) 
+    Deris::generate_site(ARGV[0], ARGV[1]) 
   else
     puts Deris.new.render(ARGV[0])
   end
