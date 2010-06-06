@@ -21,7 +21,7 @@ module Deris
     
     def render(template = nil)
       if template.nil?
-        template = @partials[:layout] || ''
+        template = @partials[:layout]
       else
         template = ::File.new(template).read if ::File.exist?(template)
       end
