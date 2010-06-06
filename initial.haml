@@ -7,11 +7,17 @@
   %body
   
     #menu
-      =render :menu
+      =partial :menu
+      
+    :markdown
+          void test()
+          {
+              return 'some code';
+          }
   
     #content
-      =render 'nested.haml'
+      =partial 'nested.haml'
       
     #subnav
-      =render :subnav
+      =partial :subnav
   

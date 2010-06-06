@@ -4,32 +4,31 @@ require 'rubygems'
 require 'fileutils'
 require 'haml'
 
-module Deris
+class Deris
 
-  def self.render(template)
-    if template.is_a? Symbol
-      template = template.to_s
-    else
-      template = File[template]
-    end
-    haml_engine = Haml::Engine.new(template)
-    haml_engine.render(self)
+  attr_accessor :partials
+  
+  def initialize()
+    @partials = {}
   end
   
-  private
-  
-  def self.read_file(filename)
-    f = File.open(filename, "r") 
-    data = ''
-    f.each_line do |line|
-      data += line
+  def partial(template)
+    if template.is_a? Symbol
+      @partials[template]
+    else
+      render(template)
     end
-    data   
+  end
+  
+  def render(template)
+    template = File.new(template).read if File.exist?(template)
+    haml_engine = Haml::Engine.new(template)
+    haml_engine.render(self)
   end
 
 end
 
 if __FILE__ == $0
-  puts Deris::render(ARGV[0])
+  puts Deris.new.render(ARGV[0])
 end
 
