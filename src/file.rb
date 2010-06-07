@@ -7,6 +7,8 @@ module Deris
 
   class File
     
+    attr_reader :name
+    
     def initialize(name = 'index', partials = {})
       @name = name
       @partials = partials
