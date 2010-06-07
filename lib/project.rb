@@ -8,7 +8,7 @@ module Deris
   
     def initialize(source)
       @source = source
-      @content_directory = ::File.join(@source, '_content')
+      @content_directory = ::File.join(@source, '_src')
       @defaults = partials_from @content_directory
     end
     
