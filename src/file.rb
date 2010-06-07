@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'fileutils'
 require 'haml'
-require 'maruku'
 
 module Deris
 
