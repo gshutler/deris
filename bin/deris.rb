@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
-require File.join(File.dirname(__FILE__), 'src', 'project')
+require File.join(File.dirname(__FILE__), '..', 'lib', 'project')
 
 
 if File.directory? ARGV[0]
