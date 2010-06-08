@@ -14,6 +14,7 @@ module Deris
     end
     
     def write(directory)
+      FileUtils.mkdir(directory) unless ::File.exist? directory
       output_path = ::File.join(directory, "#{@name}.html")
       ::File.open(output_path, 'w+') do |file|
         file.write render

@@ -4,12 +4,78 @@ require ::File.join(::File.dirname(__FILE__), 'file')
 
 module Deris
 
-  class Project
+  module PartialHasher
+    
+    def partials_hash
+      raise 'need @directory value to use partials_hash' unless @directory
+      partials = {}
+      partial_file_mask = ::File.join(@directory, '*.haml')
+      partial_files = ::Dir.glob(partial_file_mask)
+      
+      partial_files.each do |file|
+        file_sym = ::File.basename(file, '.haml').to_sym
+        partials[file_sym] = ::File.new(file).read      
+      end
+      
+      partials      
+    end
+    
+  end
   
-    def initialize(source)
+  module DirectoryWriter
+  
+    def write_file(output)
+      raise 'need @file_name and @partials values to use write_file' unless @file_name and @partials
+      File.new(@file_name, @partials).write output
+    end
+  
+  end
+  
+  module SubdirectoryList
+  
+    def sub_directories
+      raise 'need @directory value to use sub_directories' unless @directory
+      sub_directory_mask = ::File.join(@directory, '*')
+      ::Dir[sub_directory_mask].find_all do |dir|
+        ::File.directory?(dir)
+      end
+    end
+    
+  end
+
+  class Directory
+    include PartialHasher
+    include DirectoryWriter
+    include SubdirectoryList
+      
+    def initialize(directory, defaults = {})
+      @directory = directory
+      @file_name = ::File.basename(directory)
+      @partials = defaults.merge(partials_hash)
+    end
+    
+    def write(output)
+      # write out the content from this directory
+      write_file output
+      
+      sub_output = ::File.join(output, @file_name)
+      sub_directories.each do |dir|
+        Directory.new(dir, @partials).write(sub_output)
+      end
+    end
+  
+  end
+
+  class Project
+    include PartialHasher
+    include DirectoryWriter
+    include SubdirectoryList
+  
+    def initialize(source, defaults = {})
       @source = source
-      @source_directory = ::File.join(@source, '_src')
-      @defaults = partials_from @source_directory
+      @file_name = 'index'
+      @directory = ::File.join(@source, '_src')
+      @partials = defaults.merge(partials_hash)
     end
     
     def write(output)
@@ -22,40 +88,15 @@ module Deris
       static_content = Dir[static_content_mask].reject{|path| path =~ /_src$/}      
       static_content.each{|path| FileUtils.cp_r(path, output)}
       
-      # generate the index page from defaults
-      File.new('index', @defaults).write output
-
+      # generate the root page
+      write_file output
+      
       # generate the other pages of the site from sub-directories
-      source_directories.each do |dir|
-        partials = partials_from dir
-        partials = @defaults.merge(partials)        
-        file_name = ::File.basename(dir)
-        File.new(file_name, partials).write output
+      sub_directories.each do |dir|
+        Directory.new(dir, @partials).write(output)
       end
     end
-    
-    private
-    
-    def source_directories
-      source_directory_mask = ::File.join(@source_directory, '*')
-      ::Dir[source_directory_mask].find_all do |dir|
-        ::File.directory?(dir)
-      end      
-    end
-  
-    def partials_from(directory)
-      partials = {}
-      partial_file_mask = ::File.join(directory, '*.haml')
-      partial_files = ::Dir.glob(partial_file_mask)
-      
-      partial_files.each do |file|
-        file_sym = ::File.basename(file, '.haml').to_sym
-        partials[file_sym] = ::File.new(file).read      
-      end
-      
-      partials
-    end
-    
+        
   end
 
 end
