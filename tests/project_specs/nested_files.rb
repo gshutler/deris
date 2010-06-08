@@ -1,5 +1,5 @@
+require 'spec'
 require File.join(File.dirname(__FILE__), '..', '..', 'lib', 'project')
-require 'rspec'
 
 describe Deris::Project do
   
@@ -10,6 +10,7 @@ describe Deris::Project do
     
     let(:project) { Deris::Project.new(File.join(examples, 'project')) }
     let(:morrisons_directory) { File.join(output, 'morrisons') }
+    let(:bread_file) { File.join(morrisons_directory, 'bread.html') }
     
     before do
       project.write(output)
@@ -20,12 +21,11 @@ describe Deris::Project do
     end
     
     it 'should create a file called "bread.html" in the morrisons directory' do
-      File.exist?(File.join(morrisons_directory, 'bread.html')).should be_true
+      File.exist?(bread_file).should be_true
     end
     
     it 'should have the phrase "Freshly baked in store, every day" in "bread.html"' do
-      # don't know how to check the contents of a file off the top of my head
-      false.should be_true
+      File.read(bread_file).should =~ /Freshly baked in store, every day/
     end
   
   end  
