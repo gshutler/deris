@@ -5,23 +5,47 @@
 
 Gem::Specification.new do |s|
   s.name = %q{deris}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Garry Shutler"]
-  s.date = %q{2010-06-07}
+  s.date = %q{2010-06-08}
   s.description = %q{Simple documentation creation engine based on HAML}
   s.email = %q{garry@robustsoftware.co.uk}
   s.files = [
     "lib/deris.rb",
+     "lib/directory.rb",
+     "lib/directory_writer.rb",
      "lib/file.rb",
-     "lib/project.rb"
+     "lib/partial_hasher.rb",
+     "lib/project.rb",
+     "lib/subdirectory_list.rb"
   ]
   s.homepage = %q{http://github.com/gshutler/deris}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Simple documentation creation engine based on HAML}
+  s.test_files = [
+    "tests/build_project.rb",
+     "tests/examples",
+     "tests/examples/file",
+     "tests/examples/file/initial.haml",
+     "tests/examples/file/nested.haml",
+     "tests/examples/project",
+     "tests/examples/project/_src",
+     "tests/examples/project/_src/content.haml",
+     "tests/examples/project/_src/layout.haml",
+     "tests/examples/project/_src/menu.haml",
+     "tests/examples/project/_src/morrisons",
+     "tests/examples/project/_src/morrisons/bread",
+     "tests/examples/project/_src/morrisons/bread/content.haml",
+     "tests/examples/project/_src/morrisons/content.haml",
+     "tests/examples/project/_src/morrisons/subnav.haml",
+     "tests/examples/project/_src/subnav.haml",
+     "tests/project_specs",
+     "tests/project_specs/nested_files.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
@@ -29,11 +53,14 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<haml>, [">= 2.2.0"])
+      s.add_runtime_dependency(%q<rspec>, [">= 1.3.0"])
     else
       s.add_dependency(%q<haml>, [">= 2.2.0"])
+      s.add_dependency(%q<rspec>, [">= 1.3.0"])
     end
   else
     s.add_dependency(%q<haml>, [">= 2.2.0"])
+    s.add_dependency(%q<rspec>, [">= 1.3.0"])
   end
 end
 

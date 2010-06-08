@@ -5,7 +5,7 @@ namespace :jeweler do
 	require 'jeweler'	
 	Jeweler::Tasks.new do |gs|
 	  gs.name      = "deris"
-    gs.version   = "0.1.2"
+    gs.version   = "0.1.3"
     gs.author    = "Garry Shutler"
     gs.email     = "garry@robustsoftware.co.uk"
     
@@ -13,8 +13,12 @@ namespace :jeweler do
     gs.summary       = "Simple documentation creation engine based on HAML"
     gs.description   = "Simple documentation creation engine based on HAML"
     
-    gs.files         = FileList['lib/*.rb'].to_a
+    gs.files         = FileList['lib/*.rb']
+    gs.test_files    = FileList['tests/**/*']
+    
     gs.require_path  = "lib"
+    
     gs.add_dependency("haml", ">=2.2.0")
+    gs.add_dependency("rspec", ">=1.3.0")
 	end
 end
