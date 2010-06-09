@@ -1,6 +1,7 @@
 %ul
   %li 
-    %a{:href => 'index.html'} Home
+    %a{:href => url(:index)} Home
   %li 
-    %a{:href => 'morrisons.html'} Morrisons
-  %li Third
+    %a{:href => url(:morrisons)} Morrisons
+  %li
+    %a{:href => url(:morrisons, :bread)} Bread

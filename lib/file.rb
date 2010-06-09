@@ -4,9 +4,10 @@ module Deris
     
     attr_reader :name
     
-    def initialize(name = 'index', partials = {})
+    def initialize(name = 'index', partials = {}, depth = nil)
       @name = name
       @partials = partials
+      @depth = depth || 0
     end
     
     def write(directory)
@@ -32,6 +33,18 @@ module Deris
         template = @partials[template] || ''
       end
       render(template)
+    end
+    
+    def url(*segments)
+      sections = []
+      @depth.times do
+        sections << '..'
+      end
+      segments.each do |segment|
+        sections << segment
+      end
+      
+      sections.join('/') + '.html'
     end
     
   end

@@ -7,14 +7,15 @@ module Deris
     
     attr_reader :file_name, :partials, :directory
       
-    def initialize(directory, defaults = {})
+    def initialize(directory, defaults = {}, depth = 0)
       @directory = directory
       @file_name = ::File.basename(directory)
       @partials = defaults.merge(partials_hash)
+      @depth = depth
     end
         
     def sub_output(output)
-      ::File.join(output, @file_name)
+      return ::File.join(output, @file_name), @depth + 1
     end
   
   end

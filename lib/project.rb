@@ -31,7 +31,7 @@ module Deris
     end
     
     def sub_output(output)
-      output
+      return output, 0 # zero default depth
     end
         
   end

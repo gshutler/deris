@@ -11,8 +11,9 @@ module Deris
       write_file output
 
       # write out the sub directories
-      sub_directories.each do |dir|        
-        Directory.new(dir, partials).write(sub_output(output))
+      sub_directories.each do |dir|
+        sub_output_dir, sub_depth = sub_output(output)
+        Directory.new(dir, partials, sub_depth).write(sub_output_dir)
       end
     end
     
@@ -21,7 +22,7 @@ module Deris
         raise 'need to respond to "file_name" and "partials" to use write_file' 
       end
       
-      File.new(file_name, partials).write output
+      File.new(file_name, partials, @depth).write(output)
     end
     
   end
