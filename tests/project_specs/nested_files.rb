@@ -1,10 +1,9 @@
-require 'spec'
-require File.join(File.dirname(__FILE__), '..', '..', 'lib', 'project')
+require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe Deris::Project do
-  
-  let(:examples) { File.join(File.dirname(__FILE__), '..', 'examples') }
+
   let(:output) { File.join(File.dirname(__FILE__), '..', '..', 'output') }
+  let(:examples) { File.join(File.dirname(__FILE__), '..', 'examples') }
 
   context 'with nested templates' do
     

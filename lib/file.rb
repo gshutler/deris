@@ -1,7 +1,3 @@
-require 'rubygems'
-require 'fileutils'
-require 'haml'
-
 module Deris
 
   class File

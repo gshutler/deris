@@ -22,3 +22,7 @@ namespace :jeweler do
     gs.add_dependency("rspec", ">=1.3.0")
 	end
 end
+
+# load all rake files in the project
+rakefile_mask = File.join(File.expand_path(File.dirname(__FILE__)), '**', '*.rake')
+Dir.glob(rakefile_mask).each {|f| load f }

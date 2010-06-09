@@ -1,7 +1,3 @@
-require 'rubygems'
-require 'fileutils'
-require ::File.join(::File.dirname(__FILE__), 'file')
-
 module Deris
   
   module DirectoryWriter

@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'fileutils'
-
 module Deris
 
   module PartialHasher
