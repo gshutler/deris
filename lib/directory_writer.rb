@@ -15,6 +15,8 @@ module Deris
         sub_output_dir, sub_depth = sub_output(output)
         Directory.new(dir, partials, sub_depth).write(sub_output_dir)
       end
+      
+      true # don't return anything the client could work with
     end
     
     def write_file(output)

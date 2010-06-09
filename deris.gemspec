@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{deris}
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Garry Shutler"]
-  s.date = %q{2010-06-08}
+  s.date = %q{2010-06-09}
   s.description = %q{Simple documentation creation engine based on HAML}
   s.email = %q{garry@robustsoftware.co.uk}
   s.files = [
@@ -27,24 +27,27 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Simple documentation creation engine based on HAML}
   s.test_files = [
-    "tests/build_project.rb",
+    "tests/project_specs",
+     "tests/project_specs/nested_files.rb",
+     "tests/spec_helper.rb",
      "tests/examples",
      "tests/examples/file",
-     "tests/examples/file/initial.haml",
      "tests/examples/file/nested.haml",
+     "tests/examples/file/initial.haml",
      "tests/examples/project",
      "tests/examples/project/_src",
-     "tests/examples/project/_src/content.haml",
-     "tests/examples/project/_src/layout.haml",
      "tests/examples/project/_src/menu.haml",
+     "tests/examples/project/_src/layout.haml",
      "tests/examples/project/_src/morrisons",
+     "tests/examples/project/_src/morrisons/subnav.haml",
+     "tests/examples/project/_src/morrisons/fish",
+     "tests/examples/project/_src/morrisons/fish/content.haml",
      "tests/examples/project/_src/morrisons/bread",
      "tests/examples/project/_src/morrisons/bread/content.haml",
      "tests/examples/project/_src/morrisons/content.haml",
-     "tests/examples/project/_src/morrisons/subnav.haml",
      "tests/examples/project/_src/subnav.haml",
-     "tests/project_specs",
-     "tests/project_specs/nested_files.rb"
+     "tests/examples/project/_src/content.haml",
+     "tests/spec_tasks.rake"
   ]
 
   if s.respond_to? :specification_version then
@@ -53,14 +56,14 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<haml>, [">= 2.2.0"])
-      s.add_runtime_dependency(%q<rspec>, [">= 1.3.0"])
+      s.add_development_dependency(%q<rspec>, [">= 2.0.0.beta.9"])
     else
       s.add_dependency(%q<haml>, [">= 2.2.0"])
-      s.add_dependency(%q<rspec>, [">= 1.3.0"])
+      s.add_dependency(%q<rspec>, [">= 2.0.0.beta.9"])
     end
   else
     s.add_dependency(%q<haml>, [">= 2.2.0"])
-    s.add_dependency(%q<rspec>, [">= 1.3.0"])
+    s.add_dependency(%q<rspec>, [">= 2.0.0.beta.9"])
   end
 end
 

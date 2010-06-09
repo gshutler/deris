@@ -5,7 +5,7 @@ namespace :jeweler do
 	require 'jeweler'	
 	Jeweler::Tasks.new do |gs|
 	  gs.name      = "deris"
-    gs.version   = "0.1.3"
+    gs.version   = "0.1.4"
     gs.author    = "Garry Shutler"
     gs.email     = "garry@robustsoftware.co.uk"
     
@@ -19,7 +19,7 @@ namespace :jeweler do
     gs.require_path  = "lib"
     
     gs.add_dependency("haml", ">=2.2.0")
-    gs.add_dependency("rspec", ">=1.3.0")
+    gs.add_development_dependency("rspec", ">=2.0.0.beta.9")
 	end
 end
 
