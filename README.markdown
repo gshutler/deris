@@ -1,15 +1,15 @@
-= Deris
+# Deris
 
 A documentation templating engine based on [HAML](http://haml-lang.com/)
 
-== Installation
+## Installation
 
 Whenever significant functionality is added to deris a new gem will be added to
 [rubygems](http://rubygems.org/gems/deris) so installation is easy:
 
     gem install deris
 
-== Getting started
+## Getting started
 
 Deris takes and transforms the contents of one directory and transforms and 
 writes it out to another directory. Your source directory should be laid out
@@ -104,7 +104,7 @@ Which will result in an output like this:
       index.html     # _src/layout.haml + _src/content.haml
       morrisons.html # _src/layout.haml + _src/morrisons/content.haml
 
-== Getting help
+## Getting help
 
 You can get hold of me [on twitter](http://twitter.com/gshutler), [through a
 message on github](http://github.com/inbox/new/gshutler) or even via ye olde 
