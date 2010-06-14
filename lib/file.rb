@@ -35,16 +35,14 @@ module Deris
       render(template)
     end
     
-    def url(*segments)
+    def url(path)
       sections = []
       @depth.times do
         sections << '..'
       end
-      segments.each do |segment|
-        sections << segment
-      end
+      sections << path
       
-      sections.join('/') + '.html'
+      sections.join('/')
     end
     
   end
