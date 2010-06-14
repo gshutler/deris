@@ -5,13 +5,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{deris}
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Garry Shutler"]
-  s.date = %q{2010-06-09}
+  s.date = %q{2010-06-14}
   s.description = %q{Simple documentation creation engine based on HAML}
   s.email = %q{garry@robustsoftware.co.uk}
+  s.extra_rdoc_files = [
+    "README.markdown"
+  ]
   s.files = [
     "lib/deris.rb",
      "lib/directory.rb",
@@ -30,7 +33,14 @@ Gem::Specification.new do |s|
     "tests/project_specs",
      "tests/project_specs/nested_files.rb",
      "tests/spec_helper.rb",
+     "tests/directory_specs",
+     "tests/directory_specs/content_convention.rb",
      "tests/examples",
+     "tests/examples/contentconventionclash",
+     "tests/examples/contentconventionclash/contentconventionclash.haml",
+     "tests/examples/contentconventionclash/content.haml",
+     "tests/examples/contentconvention",
+     "tests/examples/contentconvention/contentconvention.haml",
      "tests/examples/file",
      "tests/examples/file/nested.haml",
      "tests/examples/file/initial.haml",

@@ -104,6 +104,21 @@ Which will result in an output like this:
       index.html     # _src/layout.haml + _src/content.haml
       morrisons.html # _src/layout.haml + _src/morrisons/content.haml
 
+If you prefer you can specify the `:content` partial in a file with the same
+name as the directory. This stops you ending up with multiple files called 
+`content.haml` which can make the project a bit easier to traverse. If there is 
+a file with the same name as the directory and a `content.haml` then the 
+`:content` partial will refer to `content.haml`, not the file with the same
+name as the directory.
+
+You can create URLs relative to the root of your generated content by using the 
+`url` helper in your HAML files:
+
+    %a{:href => url('morrisons/bread.html')} Bread
+
+This will look at the current "depth" of the file within your project and 
+prepend the correct quantity of `../` to your URL. 
+
 ## Getting help
 
 You can get hold of me [on twitter](http://twitter.com/gshutler), [through a

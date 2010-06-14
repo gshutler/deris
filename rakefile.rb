@@ -5,7 +5,7 @@ namespace :jeweler do
 	require 'jeweler'	
 	Jeweler::Tasks.new do |gs|
 	  gs.name      = "deris"
-    gs.version   = "0.1.4"
+    gs.version   = "0.1.5"
     gs.author    = "Garry Shutler"
     gs.email     = "garry@robustsoftware.co.uk"
     
